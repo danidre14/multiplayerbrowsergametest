@@ -1,0 +1,19 @@
+{
+  "name": "multiplayerbrowsergamehackernoon",
+  "version": "1.0.0",
+  "description": "Following a multiplayer browser tank game tutorial from Hackernoon",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "devStart": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
