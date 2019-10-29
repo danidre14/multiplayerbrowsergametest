@@ -43,7 +43,7 @@ io.on('connection', function (socket) {
         player.tickCount = data.tickCount;
     });
     socket.on('disconnect', function () {
-        // io.x
+        io.emit('disconnect', socket.id);
         // remove disconnected player
         delete players[socket.id]
     });

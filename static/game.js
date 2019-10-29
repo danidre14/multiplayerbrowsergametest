@@ -62,7 +62,6 @@ document.addEventListener('keyup', function (event) {
             break;
     }
 });
-socket.emit('new player', player);
 setInterval(function () {
     // console.log(action, isEmpty(action))
     if(!isEmpty(action))
@@ -132,7 +131,7 @@ const clamp = function (value, minN, maxN) {
 
 const herp = function(num, oNum, nNum, speed) {
     let dist = nNum - oNum;
-    dir = dist > 0? 1 : dist < 0? -1: 0; console.log(speed)
+    dir = dist > 0? 1 : dist < 0? -1: 0;
     num += speed* dir;
     num = clamp(num, oNum, nNum);
     return num;
@@ -155,7 +154,6 @@ const renderMovement = function () {
             let history = playerss.tickCount;
             if (playerHistory[history].x !== playerss.x && playerHistory[history].y !== playerss.y) {
                 player = playerss;
-                console.log('adjusting player', playerss)
             }
         } else {
             // context.fillStyle = 'green';
@@ -190,7 +188,6 @@ socket.on('state', function (playerList, theSpeed) {
     var now = Date.now();
     SHB = now - lastUpdate;
     lastUpdate = now;
-    console.log(SHB)
 
     //set all waiting
     //send new ones
@@ -243,9 +240,20 @@ forever (if each entity nowMan !== each entity oldMan ) lerp
 */
 var lastUpdate = 0;
 socket.on('connect', () => {
+    if(beenDisconnected) location.reload();
+    else {
     lastUpdate = Date.now();
-    console.log(socket.id)
+    console.log('has connected to server')
+    socket.emit('new player', player);
+    }
 });
+
+let beenDisconnected = false;
+socket.on('disconnect', function (ID) {
+    beenDisconnected = true;
+    console.log('someone has disconnected:', ID);
+    delete players[ID]
+})
 
 // Get the linear interpolation between two value
 const lerp = function (value1, value2, amount) {
