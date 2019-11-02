@@ -160,14 +160,14 @@ const renderMovement = function () {
                 player = playerss;
             }
         } else {
-            // context.fillStyle = 'green';
-            // context.beginPath();
-            // context.arc(playerss.x, playerss.y, 10, 0, 2 * Math.PI);
-            // context.fill();
-            // context.fillStyle = 'blue';
-            // context.beginPath();
-            // context.arc(playerss.xx, playerss.yy, 10, 0, 2 * Math.PI);
-            // context.fill();
+            context.fillStyle = 'green';
+            context.beginPath();
+            context.arc(playerss.x, playerss.y, 10, 0, 2 * Math.PI);
+            context.fill();
+            context.fillStyle = 'blue';
+            context.beginPath();
+            context.arc(playerss.xx, playerss.yy, 10, 0, 2 * Math.PI);
+            context.fill();
             context.fillStyle = 'purple';
             context.beginPath();
             context.arc(playerss.xxx, playerss.yyy, 10, 0, 2 * Math.PI);
