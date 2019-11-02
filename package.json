@@ -6,8 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "devStart": "nodemon server.js",
-    "publish": "git add . && git commit -m",
-    "postpublish": "git push mgaemtestus master && git push mgaemtesteu master"
+    "uploadGame": "git add . && git commit -m",
+    "postuploadGame": "git push",
+    "publishGame": "git push mgaemtestus master && git push mgaemtesteu master"
   },
   "author": "",
   "license": "ISC",
