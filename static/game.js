@@ -107,9 +107,13 @@ const tickMovement = function () {
             players[id].x = herp(players[id].x, players[id].ox, players[id].nx, speed);
             players[id].y = herp(players[id].y, players[id].oy, players[id].ny, speed);
             // players[id].xx = derp(players[id].x, players[id].ox, players[id].nx, SHB);
-            // players[id].yy = derp(players[id].y, players[id].oy, players[id].ny, SHB);
-            players[id].xxx = lerp(players[id].ox, players[id].nx, MSHB);
-            players[id].yyy = lerp(players[id].oy, players[id].ny, MSHB);
+            // // players[id].yy = derp(players[id].y, players[id].oy, players[id].ny, SHB);
+            // players[id].xxx = lerp(players[id].ox, players[id].nx, MSHB);
+            // players[id].yyy = lerp(players[id].oy, players[id].ny, MSHB);
+            players[id].xx = lerp(players[id].ox, players[id].nx, MSHB);
+            players[id].yy = lerp(players[id].oy, players[id].ny, MSHB);
+            players[id].xxx = cerp(players[id].ox, players[id].nx, MSHB);
+            players[id].yyy = cerp(players[id].oy, players[id].ny, MSHB);
             // console.log('x:', players[id].x, 'nx:', players[id].nx, 'lerpx:', lerp(players[id].ox, players[id].nx, MSHB), 'derpx:', derp(players[id].x, players[id].ox, players[id].nx, SHB));
         }
     }
@@ -259,9 +263,20 @@ socket.on('disconnect', function (ID) {
 const lerp = function (value1, value2, amount) {
     amount = amount < 0 ? 0 : amount;
     amount = amount > 1 ? 1 : amount;
-    var value = value1 + (value2 - value1) * amount;
+    var value = (1 - amount) * value1 + amount * value2;
     var val = (value2 - value > -1 && value2 - value < 1) ? value2 : value; //just make value if dont want 
     return val;
+    //return value1 + (value2 - value1) * amount;Math.min(Math.max(value, min), max)
+}
+const cerp = function (value1, value2, amount) {
+    amount = amount < 0 ? 0 : amount;
+    amount = amount > 1 ? 1 : amount;
+    const value = (1 - Math.cos(amount * Math.PI)) / 2;
+    var val = (value1 * (1 - value)) + (value2 * value);
+  return (value2 - val > -1 && value2 - val < 1) ? value2 : val;
+    // var value = (1 - amount) * value1 + amount * value2;
+    // var val = (value2 - value > -1 && value2 - value < 1) ? value2 : value; //just make value if dont want 
+    // return val;
     //return value1 + (value2 - value1) * amount;Math.min(Math.max(value, min), max)
 }
 const lerptest = function (value1, value2, amount) {
